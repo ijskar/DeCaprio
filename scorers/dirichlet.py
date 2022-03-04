@@ -1,11 +1,10 @@
-from score import Score
-from math import gamma
-from abc import abstractmethod
 import numpy as np
+
 from parameters import param_order
+from .score import Score
 
 
-class DirichletScore(Score):
+class Dirichlet(Score):
     """
         Scorer based on the Dirichlet distribution
     """

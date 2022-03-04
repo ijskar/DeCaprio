@@ -1,9 +1,9 @@
 import numpy as np
 
-from score import Score
+from .score import Score
 
 
-class HammingScore(Score):
+class Hamming(Score):
     """
         Scorer based on the Hamming distance between compared to the current best configuration
     """

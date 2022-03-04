@@ -1,4 +1,3 @@
-from cpmpy import *
 from cpmpy.solvers.solver_interface import ExitStatus, SolverInterface
 from parameters import defaults
 from copy import deepcopy

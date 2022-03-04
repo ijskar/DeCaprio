@@ -1,11 +1,11 @@
 from abc import abstractmethod
-
-from score import Score
 import numpy as np
+
+from .score import Score
 from parameters import param_order
 
 
-class HammingDirichletScore(Score):
+class HammingDirichlet(Score):
     """
         A scorer based on the Hamming scorer which uses a dirichlet distribution as tie-breaker
     """
@@ -63,27 +63,3 @@ class HammingDirichletScore(Score):
         # For each config, multiply the resulting fractions (of which there are as many as there are hyperparameters)
         subscores = np.product(subscores, axis=1)
         return subscores
-
-
-class HammingDirichletScore1(HammingDirichletScore):
-    def add_negative(self, params):
-        # Do Nothing
-        return super().add_negative(params)
-
-
-class HammingDirichletScore2(HammingDirichletScore):
-    def add_negative(self, params, mu=1):
-        # Add count of mu to all other values
-        for i in range(len(params)):
-            self.counts[i, np.arange(self.counts.shape[1]) != params[i]] += mu
-        return super().add_negative(params)
-
-
-class HammingDirichletScore3(HammingDirichletScore):
-    def add_negative(self, params):
-        # Add count of mu to all other values
-        for i in range(len(params)):
-            n = np.count_nonzero(~np.isnan(self.counts[i]))
-            mu = 1 / (n-1)
-            self.counts[i, np.arange(self.counts.shape[1]) != params[i]] += mu
-        return super().add_negative(params)

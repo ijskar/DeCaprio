@@ -1,9 +1,11 @@
-from score import Score
-import numpy as np
 from abc import abstractmethod
 
+import numpy as np
 
-class NoUpdates(Score):
+from .score import Score
+
+
+class SimplePrior(Score):
     """
         A scorer which does not update its distribution.
         Uses the initial pseudocounts a scoring function for a configuration
@@ -33,7 +35,7 @@ class NoUpdates(Score):
         return np.zeros(shape=combos.shape[0])
 
 
-class NoUpdatesArgMax(NoUpdates):
+class SortedPrior(SimplePrior):
     """
         Scorer based on the NoUpdatesScorer which computes the best configuration as an argmax of the pseudocounts
     """
@@ -51,7 +53,7 @@ class NoUpdatesArgMax(NoUpdates):
         return scores
 
 
-class NoUpdatesSample(NoUpdates):
+class SamplePrior(SimplePrior):
     """
         Scorer based on the NoUpdatesScorer which computes hte best configuration by sampling the pseudocounts
     """

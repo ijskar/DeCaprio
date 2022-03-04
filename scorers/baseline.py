@@ -1,7 +1,7 @@
-from score import Score
+from .score import Score
 import numpy as np
 
-class BaselineScore(Score):
+class RandomUniform(Score):
     """
         Random search scorer.
         Does not use seen configuraitons

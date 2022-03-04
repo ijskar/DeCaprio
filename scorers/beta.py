@@ -1,8 +1,8 @@
-from score import Score
+from .score import Score
 import numpy as np
 
 
-class Count(Score):
+class Beta(Score):
 
     def __init__(self, all_params):
         """

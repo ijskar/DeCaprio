@@ -3,15 +3,11 @@ import time
 from tqdm import tqdm
 from cpmpy.solvers import CPM_ortools, param_combinations
 
-import parameters
-from paramils import paramILSScore
 from saved_solver import SavedSolver
 import random
 from cpmpy.solvers.solver_interface import ExitStatus
 import numpy as np
 from parameters import param_order, defaults
-import pandas as pd
-from cpmpy import *
 
 
 def params_to_np(combos):
@@ -105,6 +101,9 @@ def smbo(scorer_class, m, all_params, verbose=True, time_factor=1.05, seed=0, pr
     
     if precomputed_data is not None:
         assert use_column is not None, "'use_column' cannot be None when using precomputed data"
+
+    if precomputed_data is None:
+        assert m is not None, "model cannot be None if no precomputed data is provided"
 
     configs = []
 
