@@ -1,5 +1,6 @@
 from cpmpy.solvers.solver_interface import ExitStatus, SolverInterface
-from parameters import defaults, all_params, param_order, config_id
+from parameters import defaults, all_params, param_order
+from utils import config_id
 from copy import deepcopy
 import pandas as pd
 import numpy as np

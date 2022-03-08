@@ -14,7 +14,8 @@ from scorers.hamming_dirichlet import HammingDirichlet
 from scorers.baseline import RandomUniform
 
 from algorithms import smbo
-from parameters import all_params, config_id
+from parameters import all_params
+from utils import config_id
 
 """
     Script which compares different scorers for a number of models.
