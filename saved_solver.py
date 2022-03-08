@@ -1,5 +1,5 @@
 from cpmpy.solvers.solver_interface import ExitStatus, SolverInterface
-from parameters import defaults
+from parameters import defaults, all_params, param_order, config_id
 from copy import deepcopy
 import pandas as pd
 import numpy as np
@@ -44,6 +44,12 @@ class SavedSolver(SolverInterface):
         for key in defaults:
             if key not in config:
                 config[key] = defaults[key]
+
+        id = config_id(config)
+
+        return self.df.loc[id][self.use_column]
+
+
 
         condition = np.logical_and.reduce([self.df[column] == value for column, value in config.items()])
         config = self.df[condition].iloc[0]

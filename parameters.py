@@ -25,3 +25,14 @@ defaults = {
 }
 
 param_order = sorted(list(all_params.keys()))
+
+def config_id(config):
+    id = 0
+    for i, param in enumerate(param_order):
+        param_id = all_params[param].index(config[param])
+        if i == len(param_order) - 1:
+            factor = 1
+        else:
+            factor = np.prod([len(all_params[p]) for p in param_order[i + 1:]])
+        id += param_id * factor
+    return id
