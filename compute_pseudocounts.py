@@ -38,9 +38,9 @@ def compute_pseudocounts(grid_search_data, model_names):
         counts = best[param].value_counts()
         for val, count in counts.iteritems():
             idx = all_params[param].index(val)
-            pseudocounts[i][idx] = count / len(best_configs)
+            pseudocounts[i][idx] = count
 
-        assert 1 - 1e-4 <= sum(pseudocounts[i]) <= 1 + 1e-4, "An error occured, pseudocounts should sum to 1"
+        assert sum(pseudocounts[i]) == len(best_configs), "An error occured, pseudocounts should sum to number of best configs"
 
     return pseudocounts
 
