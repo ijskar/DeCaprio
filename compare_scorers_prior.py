@@ -29,11 +29,11 @@ if __name__ == "__main__":
     # Load names of all models
     model_names = [fname.replace(model_suffix, "") for fname in os.listdir(model_root)]
     # Directory to write results of this experiment
-    outdir = "scorers_comparison"
+    outdir = "scorers_comparison_prior"
     # Suffix of the files containing the results of this experiment
     out_suffix = "_comparison.pickle"
     # Number of runs with different seeds
-    n_runs = 10
+    n_runs = 2
 
     # Directory with results of grid search
     grid_search_data = pd.read_pickle("grid_search.pickle")
@@ -43,7 +43,7 @@ if __name__ == "__main__":
     print(f"Found {runs_in_gridsearch} runs in gridsearch")
 
 
-def compare_on_model(model_name, verbose=False):
+def compare_on_model(model_name, verbose=True):
     """
         This function compares different scorers on a given CPMpy model
     """
