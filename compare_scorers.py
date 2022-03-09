@@ -17,6 +17,11 @@ from algorithms import smbo
 from parameters import all_params
 from utils import config_id
 
+import warnings
+# Supress warnings
+warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
+warnings.simplefilter(action='ignore', category=RuntimeWarning)
+
 """
     Script which compares different scorers for a number of models.
     To speedup this experiment, we are able to use cached runtimes of a grid search.

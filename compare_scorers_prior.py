@@ -1,6 +1,6 @@
 import multiprocessing as mp
 import pandas as pd
-import numpy as np
+from tqdm.auto import tqdm
 
 import os
 from os.path import join, isfile
@@ -15,6 +15,12 @@ from scorers.baseline import RandomUniform
 from algorithms import smbo
 from parameters import all_params
 from utils import config_id
+
+import warnings
+
+# Supress warnings
+warnings.simplefilter(action='ignore', category=pd.errors.PerformanceWarning)
+warnings.simplefilter(action='ignore', category=RuntimeWarning)
 
 """
     Script which compares different scorers with an informed prior for a number of models.
@@ -40,7 +46,7 @@ grid_search_data = pd.read_pickle("grid_search.pickle")
 #Calculate number of runs in grid search
 runs_in_gridsearch = len(grid_search_data.columns.unique(level=1))
 
-def compare_on_model(model_name, verbose=True):
+def compare_on_model(model_name, verbose=True, model_idx=0):
     """
         This function compares different scorers on a given CPMpy model
     """
@@ -49,7 +55,7 @@ def compare_on_model(model_name, verbose=True):
     # Load precomputed data
     assert model_name in grid_search_data.columns.levels[0], f"Grid search data for model {model_name} not found"
     precomputed_runtimes = grid_search_data[model_name]
-    model=None
+    model=model_name
 
     # Define scorers to be compared
     scorers = [
@@ -120,7 +126,7 @@ if __name__ == "__main__":
     print(f"Found {runs_in_gridsearch} runs in gridsearch")
 
     num_threads = mp.cpu_count()
-    pool = mp.Pool(1)
+    pool = mp.Pool(5)
 
     pool.map(compare_on_model, sorted(model_names))
 
