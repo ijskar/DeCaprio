@@ -13,6 +13,12 @@ class Score(object):
     def set_pseudocounts(self, pseudocounts):
         pass
 
+    def __str__(self):
+        return self.__repr__()
+
+    def __repr__(self):
+        return type(self).__name__
+
     @abstractmethod
     def add_positive(self, params):
         """

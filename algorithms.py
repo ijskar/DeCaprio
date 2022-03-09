@@ -120,7 +120,7 @@ def smbo(scorer_class, m, all_params, verbose=True, time_factor=1.05, seed=0, pr
         best_runtime = s.status().runtime
 
     # Add default's runtime as first entry in configs
-    configs.append((best_runtime, 0, defaults))
+    # configs.append((best_runtime, 0, defaults))
 
     combos = list(param_combinations(all_params))
 

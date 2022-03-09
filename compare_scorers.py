@@ -46,7 +46,7 @@ if use_precomputed_data:
     runs_in_gridsearch = len(grid_search_data.columns.unique(level=1))
 
 
-def compare_on_model(model_name, verbose=False):
+def compare_on_model(model_name, verbose=True):
     """
         This function compares different scorers on a given CPMpy model
     """
@@ -70,7 +70,10 @@ def compare_on_model(model_name, verbose=False):
                HammingDirichlet,
             ]
 
-    data = []
+    score_names = [scorer.__name__ for scorer in scorers]
+    data_entries = ["runtime", "wall", "config_id"]
+    columns = pd.MultiIndex.from_product([score_names, range(n_runs), data_entries])
+    df = pd.DataFrame(columns=columns)
     for score_class in scorers:
         for seed in range(n_runs):
             #Load data if needed
@@ -91,17 +94,14 @@ def compare_on_model(model_name, verbose=False):
                             time_factor=1
                         )
 
-            for i, (time, wall, config) in enumerate(configs):
+            data = []
+            for (time, wall, config) in configs:
                 row = {"config_id": config_id(config)}
                 row["runtime"] = time
                 row['wall'] = wall
-                row['seed'] = seed
-                row["iteration"] = i
-                row["algorithm"] = score_class.__name__
                 data.append(row)
 
-    columns = ["algorithm", "seed", "iteration","runtime", "wall", "config_id"]
-    df = pd.DataFrame(data, columns = columns)
+            df[score_class.__name__, seed] = pd.DataFrame(data, columns=data_entries).astype({"config_id":int, "runtime":float, "wall":float})
 
     filename_runtimes = join(outdir, f"{model_name}{out_suffix}")
 
