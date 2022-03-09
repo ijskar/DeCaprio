@@ -20,28 +20,25 @@ from utils import config_id
     Script which compares different scorers with an informed prior for a number of models.
 """
 
-if __name__ == "__main__":
 
-    # Directory containing CPMpy models
-    model_root = "cpmpy_models/"
-    # Suffix of the models in their saved file (example knapsack.pickle)
-    model_suffix = ".model"
-    # Load names of all models
-    model_names = [fname.replace(model_suffix, "") for fname in os.listdir(model_root)]
-    # Directory to write results of this experiment
-    outdir = "scorers_comparison_prior"
-    # Suffix of the files containing the results of this experiment
-    out_suffix = "_comparison.pickle"
-    # Number of runs with different seeds
-    n_runs = 2
+# Directory containing CPMpy models
+model_root = "cpmpy_models/"
+# Suffix of the models in their saved file (example knapsack.pickle)
+model_suffix = ".model"
+# Load names of all models
+model_names = [fname.replace(model_suffix, "") for fname in os.listdir(model_root)]
+# Directory to write results of this experiment
+outdir = "scorers_comparison_prior"
+# Suffix of the files containing the results of this experiment
+out_suffix = "_comparison.pickle"
+# Number of runs with different seeds
+n_runs = 2
 
-    # Directory with results of grid search
-    grid_search_data = pd.read_pickle("grid_search.pickle")
-    # Suffix after model name in filenames of precomputed data
-    #Calculate number of runs in grid search
-    runs_in_gridsearch = len(grid_search_data.columns.unique(level=1))
-    print(f"Found {runs_in_gridsearch} runs in gridsearch")
-
+# Directory with results of grid search
+grid_search_data = pd.read_pickle("grid_search.pickle")
+# Suffix after model name in filenames of precomputed data
+#Calculate number of runs in grid search
+runs_in_gridsearch = len(grid_search_data.columns.unique(level=1))
 
 def compare_on_model(model_name, verbose=True):
     """
@@ -119,6 +116,8 @@ if __name__ == "__main__":
         if input("Press y to overwrite results ") != 'y':
             exit(1)
         pass
+
+    print(f"Found {runs_in_gridsearch} runs in gridsearch")
 
     num_threads = mp.cpu_count()
     pool = mp.Pool(1)

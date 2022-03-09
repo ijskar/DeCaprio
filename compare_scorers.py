@@ -23,29 +23,27 @@ from utils import config_id
     Set the following parameters accordingly if you want to use precomputed runtimes.
 """
 
-if __name__ == "__main__":
-    use_precomputed_data = True
+use_precomputed_data = True
 
-    # Directory containing CPMpy models
-    model_root = "cpmpy_models/"
-    # Suffix of the models in their saved file (example knapsack.pickle)
-    model_suffix = ".model"
-    # Directory to write results of this experiment
-    outdir = "scorers_comparison"
-    # Suffix of the files containing the results of this experiment
-    out_suffix = "_comparison.pickle"
-    # Number of runs with different seeds
-    n_runs = 10
+# Directory containing CPMpy models
+model_root = "cpmpy_models/"
+# Suffix of the models in their saved file (example knapsack.pickle)
+model_suffix = ".model"
+# Directory to write results of this experiment
+outdir = "scorers_comparison"
+# Suffix of the files containing the results of this experiment
+out_suffix = "_comparison.pickle"
+# Number of runs with different seeds
+n_runs = 10
 
-    ## This part is important if you have precomputed data.
-    ## Ignored if use_precomputed_data is False
-    # Directory with results of grid search
-    if use_precomputed_data:
-        grid_search_data = pd.read_pickle("grid_search.pickle")
-        # Suffix after model name in filenames of precomputed data
-        #Calculate number of runs in grid search
-        runs_in_gridsearch = len(grid_search_data.columns.unique(level=1))
-        print(f"Found {runs_in_gridsearch} runs in gridsearch")
+## This part is important if you have precomputed data.
+## Ignored if use_precomputed_data is False
+# Directory with results of grid search
+if use_precomputed_data:
+    grid_search_data = pd.read_pickle("grid_search.pickle")
+    # Suffix after model name in filenames of precomputed data
+    #Calculate number of runs in grid search
+    runs_in_gridsearch = len(grid_search_data.columns.unique(level=1))
 
 
 def compare_on_model(model_name, verbose=False):
@@ -122,6 +120,9 @@ if __name__ == "__main__":
         if input("Press y to overwrite results ") != 'y':
             exit(1)
         pass
+
+    if use_precomputed_data:
+        print(f"Found {runs_in_gridsearch} runs in gridsearch")
 
     num_threads = mp.cpu_count()
     pool = mp.Pool(1)
