@@ -24,7 +24,7 @@ The code is structured as follows:
 │   ├── hamming.py                # Hamming scorer  
 │   ├── hamming_dirichlet.py      # Hamming scorer with Dirichlet tie-breaking
 │   ├── score.py                  # Scorer base class
-│   └── simple_prior.py 
+│   └── simple_prior.py           # Sample prior and Sorted prior scorers
 └── utils.py                      # Utility functions for computing config ids
 ```
 
