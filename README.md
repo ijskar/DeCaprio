@@ -3,7 +3,7 @@ This repository contains the code for reproducing experiments found in our paper
 *Bleukx I, Berden S et al. (2022): Model-based algorithm configuration with adaptive capping and prior distributions, CPAIOR 2022*
 
 ## Overview of the code
-Different scoring functions are implemented to work with the our DeCaprio algorithm based on SMBO with adaptive cappig.
+Different scoring functions are implemented to work with the our DeCaprio algorithm based on SMBO with adaptive capping.
 The code is structured as follows:
 
 ```bash
