@@ -13,7 +13,7 @@ The code is structured as follows:
 ├── compare_scorers.py            # Experiment for comparing scoring function without prior
 ├── compare_scorers_prior.py      # Experiment for comparing scoring functions with prior
 ├── compute_pseudocounts.py       # Code for calculaing pseudocounts from grid search data
-├── cpmpy_models                  # Direcotry with all CPMpy models
+├── cpmpy_models                  # Directory with all CPMpy models
 ├── parameters.py                 # Parameter configurations for Google's OR-tools solver
 ├── saved_solver.py               # Solver mimicing a CPMpy.SolverInterface
 ├── scorers       
